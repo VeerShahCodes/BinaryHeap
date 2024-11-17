@@ -46,7 +46,7 @@ namespace BinaryHeap
 
         }
 
-        public int GetParent(int index)
+        private int GetParent(int index)
         {
             return index / 2;
         }
