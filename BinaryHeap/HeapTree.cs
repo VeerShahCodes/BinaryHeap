@@ -9,30 +9,54 @@ namespace BinaryHeap
     public class HeapTree<T>
         where T : IComparable<T>
     {
+        //min heap
 
-        T[] arr = new T[10];
+        public T[] arr = new T[1];
         public int Count { get; private set; }
         
         public HeapTree()
         {
 
         }
+        private void ResizeArr()
+        {
+            T[] newArr = new T[arr.Length * 2];
+            for(int i = 0; i < arr.Length; i++)
+            {
+                newArr[i] = arr[i];
+            }
+            arr = newArr;
+        }
 
         public void Insert(T val)
         {
-            arr[Count] = val;
             if(Count >= arr.Length)
             {
-                T[] newArr = new T[arr.Length * 2];
-                arr = newArr;
-                arr[Count] = val;
+                ResizeArr();
             }
-            HeapifyUp(arr, Count);
+            arr[Count] = val;
+
+            HeapifyUp(Count);
             Count++;
         }
 
-        public void HeapifyUp(T[] arr, int Count)
+        public void HeapifyUp(int Count)
         {
+            while(true)
+            {
+                int parentIndex = ((Count + 1) / 2) - 1;
+                if (parentIndex < 0) break;
+                if (arr[Count].CompareTo(arr[parentIndex]) < 0)
+                {
+                    T ogArrOfCount = arr[Count];
+                    arr[Count] = arr[parentIndex];
+                    arr[parentIndex] = ogArrOfCount;
+                }
+                else
+                {
+                    break;
+                }
+            }
 
         }
 
