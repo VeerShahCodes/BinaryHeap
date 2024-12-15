@@ -8,9 +8,13 @@
             HeapTree<int> heap = new HeapTree<int>();
             heap.Insert(5);
             heap.Insert(1);
-
-            Console.WriteLine(heap.arr[0]);
-            Console.WriteLine(heap.arr[1]);
+            heap.Insert(3);
+            heap.Insert(6);
+            heap.Pop();
+            heap.Insert(2);
+            heap.Insert(7);
+            heap.Pop();
+            heap.WriteHeap();
 
 
         }

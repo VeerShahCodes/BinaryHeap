@@ -40,17 +40,20 @@ namespace BinaryHeap
             Count++;
         }
 
-        public void HeapifyUp(int Count)
+
+
+        public void HeapifyUp(int current)
         {
             while(true)
             {
-                int parentIndex = ((Count + 1) / 2) - 1;
+                int parentIndex = GetParent(current);
                 if (parentIndex < 0) break;
-                if (arr[Count].CompareTo(arr[parentIndex]) < 0)
+                if (arr[current].CompareTo(arr[parentIndex]) < 0)
                 {
-                    T ogArrOfCount = arr[Count];
-                    arr[Count] = arr[parentIndex];
+                    T ogArrOfCount = arr[current];
+                    arr[current] = arr[parentIndex];
                     arr[parentIndex] = ogArrOfCount;
+                    current = parentIndex;
                 }
                 else
                 {
@@ -62,17 +65,51 @@ namespace BinaryHeap
 
         public void Pop()
         {
-
+            arr[0] = arr[Count - 1];
+             
+            Count--;
+            HeapifyDown(0);
         }
 
-        public void HeapifyDown()
+        public void HeapifyDown(int current)
         {
+      
+            while (true)
+            {
+                int leftChild = GetLeftChild(current);
+                int rightChild = GetRightChild(current);
+                if(leftChild > Count && rightChild > Count) //leaf position
+                {
+                    break;
+                }
+                if (arr[leftChild].CompareTo(arr[rightChild]) < 0)
+                {
+                    T ogArrOfCount = arr[current];
+                    arr[current] = arr[leftChild];
+                    arr[leftChild] = ogArrOfCount;
+                    current = leftChild;
+                }
+                else
+                {
+                    T ogArrOfCount = arr[current];
+                    arr[current] = arr[rightChild];
+                    arr[rightChild] = ogArrOfCount;
+                    current = rightChild;
+                }
+            }
+        }
 
+        public void WriteHeap()
+        {
+            for(int i = 0; i < Count; i++)
+            {
+                Console.WriteLine(arr[i]);
+            }
         }
 
         private int GetParent(int index)
         {
-            return index / 2;
+            return ((index + 1) / 2) - 1;
         }
 
 
