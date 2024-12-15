@@ -1,4 +1,6 @@
-﻿namespace BinaryHeap
+﻿using System.Security.Cryptography;
+
+namespace BinaryHeap
 {
     internal class Program
     {
@@ -6,17 +8,29 @@
         {
             Console.WriteLine("Hello, Worldeeeee!");
             HeapTree<int> heap = new HeapTree<int>();
-            heap.Insert(5);
-            heap.Insert(1);
-            heap.Insert(3);
-            heap.Insert(6);
-            heap.Pop();
-            heap.Insert(2);
-            heap.Insert(7);
-            heap.Pop();
-            heap.WriteHeap();
+
+            List<int> list = new List<int>([5, 687, 34, 7, 4, 7, 4, 5, 3, 5, 7,]);
+            list = HeapSort(list, heap);
+            for(int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine(list[i]);
+            }
 
 
+        }
+        static  List<int> HeapSort(List<int> list,HeapTree<int> heap)
+        {
+            List<int> vals = new List<int>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                heap.Insert(list[i]);
+            }
+
+            for(int i = 0; i < list.Count; i++)
+            {
+                vals.Add(heap.Pop());
+            }
+            return vals;
         }
     }
 }

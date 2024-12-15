@@ -63,12 +63,14 @@ namespace BinaryHeap
 
         }
 
-        public void Pop()
+        public T Pop()
         {
+            T root = arr[0];
             arr[0] = arr[Count - 1];
-             
             Count--;
             HeapifyDown(0);
+
+            return root;
         }
 
         public void HeapifyDown(int current)
@@ -98,6 +100,8 @@ namespace BinaryHeap
                 }
             }
         }
+
+       
 
         public void WriteHeap()
         {
