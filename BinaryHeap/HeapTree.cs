@@ -11,12 +11,24 @@ namespace BinaryHeap
     {
         //min heap
 
-        public T[] arr = new T[1];
+        public T[] arr;
         public int Count { get; private set; }
         
         public HeapTree()
         {
-
+            Count = 0;
+            arr = new T[1];
+        }
+        public HeapTree(T[] values)
+        {
+            arr = values;
+            int depth = (int)Math.Log2(arr.Length);
+            Count=arr.Length;
+            for (int i = (int)Math.Pow(2,depth)-1; i < arr.Length; i++)
+            {
+                HeapifyUp(i);
+            }
+            ;
         }
         private void ResizeArr()
         {
@@ -46,19 +58,16 @@ namespace BinaryHeap
         {
             while(true)
             {
-                int parentIndex = GetParent(current);
-                if (parentIndex < 0) break;
+                if (current==0) break;
+                int parentIndex = GetParent(current);               
                 if (arr[current].CompareTo(arr[parentIndex]) < 0)
                 {
                     T ogArrOfCount = arr[current];
                     arr[current] = arr[parentIndex];
                     arr[parentIndex] = ogArrOfCount;
-                    current = parentIndex;
+                    
                 }
-                else
-                {
-                    break;
-                }
+                current = parentIndex;
             }
 
         }
@@ -113,7 +122,7 @@ namespace BinaryHeap
 
         private int GetParent(int index)
         {
-            return ((index + 1) / 2) - 1;
+            return ((index -1) / 2);
         }
 
 
